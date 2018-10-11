@@ -1,0 +1,45 @@
+#include<iostream>
+#include<queue> // 큐 라이브러리 추가
+#include<time.h> // 시간 라이브러리 추가
+using namespace std;
+
+int main() {
+
+	time_t start, end; // 시간 만들기
+	queue<int> que;  // 큐 만들기
+
+	int n = 10;
+	double result;
+
+	start = clock(); // 시간 측정 시작
+
+	// 큐에 추가하고자 하는 데이터 입력
+	for (int i = 1; i <= n; i++) {
+		que.push(i);
+	}
+
+	cout << "queue size : " << que.size() << "\n\n"; // 현재 큐에 저장되어 있는 데이터의 개수를 반환
+
+	// 큐의 모든 원소들 출력
+	for (int j = que.size(); j > 0; j--) {
+		cout << que.front() << "\n"; // 현재 큐의 최하위 데이터(뻬내는 것은 아님)
+		que.pop();// 현재 큐의 최하위 데이터를 제거함
+	}
+  
+	cout << "\n";
+
+	// 현재 큐가 비었으면 true, 아니면 false를 반환
+	if (que.empty()) {
+		cout << "queue is empty" << "\n\n";
+	}
+	else {
+		cout << "queue is not empty" << "\n\n";
+	}
+
+	end = clock(); // 시간  측정 끝
+	result = (double)(end - start);
+
+	cout << "시간 측정 : " << result << "\n";
+	
+	return 0;
+}
