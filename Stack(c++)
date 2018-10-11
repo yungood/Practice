@@ -1,0 +1,38 @@
+#include<iostream>
+#include<stack> // 스택 라이브러리 추가
+using namespace std;
+
+int main() {
+
+	stack<int> stack;  // 스택 만들기
+  
+	int n = 10;
+
+
+	// 스택에 추가하고자 하는 데이터 입력
+	for (int i = 1; i <= n; i++) {
+		stack.push(i);
+	}
+
+	cout << "stak size : " << stack.size() << "\n\n"; // 현재 스택에 저장되어 있는 데이터의 개수를 반환
+
+	// 스택의 모든 원소들 출력
+	for (int j = stack.size(); j > 0; j--) {
+		cout << stack.top() << "\n"; // 현재 스택의 최상위 데이터(뻬내는 것은 아님)
+		stack.pop();// 현재 스택의 최상위 데이터를 제거함
+	}
+
+	cout << "\n";
+
+
+	// 현재 스택이 비었으면 true, 아니면 false를 반환
+	if (stack.empty()) {
+		cout << "stack is empty" << "\n";
+	}
+	else {
+		cout << "stack is not empty" << "\n";
+	}
+
+	
+	return 0;
+}
