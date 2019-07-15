@@ -1,0 +1,122 @@
+#include<iostream>
+using namespace std;
+
+
+// 사칙연산(덧셈, 뺼셈, 나누기)
+
+int main() {
+
+	int a, b;
+
+	cin >> a >> b;
+
+	
+	// 덧셈
+	cout << "더하기 : " << a + b << "\n";
+
+
+	// 뺄셈
+	// 굳이 if로 나누지 않고 더하기와 동일하게 코드를 작성해도 된다.
+	if (a > b) {
+		cout << "빼기 : " << a - b << "\n";
+	}
+	else {
+		cout << "빼기 : " << b - a << "\n";
+	}
+
+
+	//나누기
+	//조건 : 절대,상대 오차는 10의 -9승까지 허용한다.
+
+	/*
+	
+	 설명)실수 자료형에서 연산을 할 떄 항상 주의깊게 신경써워야 할 사항 : ★절대,상대 오차★ 
+		  평소 일상에서는 절대,상대 오차를 신경쓰지 않을 수 있지만 실제로 수학적 계산이 많고 중요한 프로그램 일수록(ex. 우주궤도거리계산, DNA관련 계산 등)
+		  ★이진수 특징 때문에 실수 계산에서 오차는 필연적으로 발생한다. 그리고 그 오차의 정도가 매우 중요하다.★
+		  이와 같은 오차 때문에 실수를 비교할때 ' == ' 사용을 자제하는 것이 좋다.
+
+	문제 설명) ★flaot의 상대오차 정도는 10^-7 정도이고 double은 10^-15 정도이다.★ 문제는 10^-9승이므로 float말고 double을 사용하라는 의미.
+			   (printf의 경우  충분한 자릿수를 명시하지 않을 경우 double을 사용하였다하더라도 그만큼 충분히 많은 자릿수를 출력하지 않으므로 정답도 오답처리 될 수 있음)
+		 
+	
+	*/
+
+	/* 
+
+	(1) C언어
+
+	#include<stdio.h>
+	int main(){
+		int num1, num2;
+
+		scanf("%d %d", &num1, &num2);
+
+		printf("%.9lf",(double)num1/num2);   // %f :  float , %lf :  double
+
+		return 0;
+	
+	}
+	
+	>>>> 형식을 지정해줘서 자릿수를 설정할 수 있음(가장 흔한 방법)
+
+
+	(2) C++
+
+	#include<iostream>
+	#include<iomanip>
+	using namespace std;
+
+	int main(){
+		int num1, num2;
+
+		cin >> num1 >> num2 ; 
+
+		cout << setprecision(9) << "\n";
+
+		cout << fixed << (double)num1/num2 << "\n";
+
+		return 0;
+	
+	}
+
+	>>>> cout을 사용하는 C++의경우(물론 C++에서도 printf 사용가능) ★setprecision 함수★를 제공함
+		 (iomanip의 헤더파일에 있는 함수로 유효숫자 개수를 정해주는 함수(출력 범위를 지정해주는)이므로 fixed를 생략할 경우 답이 틀림)
+	
+
+
+	(3) JAVA (더하기,빼기,나누기)
+
+	import java.util.Scanner;
+	class Main{
+		public static void main(String args[]){
+			Scanner scn = new Scanner(System.in);
+
+			int a = scn.nextlnt();
+			int b = scn.nextlnt();
+
+			//더하기
+			System.out.print(a+b);
+			//빼기
+			System.out.print(a-b);
+			//나누기
+			System.out.print((double)a/b);
+		
+		}
+	
+	}
+
+
+	>>>>> C의 경우 실수 자릿수를 지정해주지 않으면 다 출력되는것이 아니라 6자리? 까지 잘라서 보여줌
+	      하지만 JAVA의 경우 자료형 크기만큼 출력해준다. 그래서 따로 소수점 자리를 지정하지 않음
+		  (문제에서 10^-9승까지의 오차를 허용한다고 했는데 dobule 은 10^-15로 10^-9보다 더 작은 오차를 보이므로)
+
+		  추가+) 자리수를 꼭 명시하고 싶다면
+		      [1] System.out.printf("%.9f", num1/num2); ->  제일 흔한 방법
+			  [2] System.out.format("%.9f", num1/num2); -> format을 사용하는 방법
+
+			  주의할점 : printf는 자리수까지 표기하는 반면 format은 뒷자리수를 반올림해서 해당 자리수를 맞춤
+
+	*/
+	
+	
+}
