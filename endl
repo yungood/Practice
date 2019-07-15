@@ -1,0 +1,48 @@
+#include<iostream>
+using namespace std;
+
+
+// 백준 온라인 저지 : 문제 2741, 2742
+
+
+/*
+
+설명) for나 while등을 이용해 많은 양의 처리를 반복적으로 수행하는 경우는 '수행속도'를 신경써야 한다.
+      특히 입출력 방식이 느리면 여러 줄을 입력 또는 출력할 때 시간초과가 발생할 수 있다.
+
+
+	  ex) for(int i = 1; i <= n ; i++){
+	          cout << i << endl;
+	      }
+
+		  >> 시간초과 발생
+		  >> 이유/원인 : endl 사용하여(즉 cout이 문제가 아니라 개행문자가 문제였던 것)
+		  >> 해결방법  : endl -> '\n'로 변경
+
+
+	  C 언어의 'printf, scanf'는  C++의 'cout, cin' 보다 느리다.(차이는 크지 않지만) 
+	  endl이 \n보다 더 느린 이유는 단순 개행이 아니라 개행 후 출력 버퍼를 비워주는 역할을 추가로 하기 때문이다.
+	  이 작업은 매우 느리다. 따라서 알고리즘에서 성능을 올리고자 한다면 endl 대신 \n(개행문자)를 사용하는 것이 훨씬 효율적이다.
+
+	  ++ 보충설명 : https://filipjaniszewski.wordpress.com/2016/01/27/io-stream-performance/ 참고하기(영어)
+
+*/
+
+int main() {
+
+	int n; 
+
+	cin >> n;
+
+	// 문제 2741
+	for (int i = 1; i <= n; i++) {
+		cout << i << "\n";
+	}
+
+	// 문제 2742
+	for (int i = n; i >= 1; i--) {
+		cout << i << "\n";
+	}
+
+}
+
