@@ -1,0 +1,31 @@
+#include<string>
+#include<vector>
+
+using namespace std;
+
+// 프로그래머스 : 2016년(요일 구하기) https://programmers.co.kr/learn/courses/30/lessons/12901
+// https://blog.naver.com/kdheejb7/221576263211 - 블로그 해설 참고
+
+/*
+   윤년(leap year) : 2월은 28일까지 있는 것이 평년이다. 그러나 2월을 29일로 둔 해를 윤년이라고 한다.
+					 양력에서는 약 1년에 1번씩 오고 음력에서는 19년 동안에 7번 윤년이 온다.
+*/
+
+
+string solution(int a, int b) {
+	string answer = "";
+	string week[] = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" };
+	
+	int day[] = { 31,29,31,30,31,30,31,31,30,31,30,31 };
+	int totalDay = 0;
+	
+	//  i가 1부터 시작하면 i < a로 하면 된다
+	for (int i = 0; i < (a - 1); i++) {
+		totalDay += day[i];
+	}
+
+	totalDay += b;
+
+	answer = week[(totalDay - 1 + 5) % 7];
+	return answer;
+}
