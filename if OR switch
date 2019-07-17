@@ -1,0 +1,132 @@
+#include<iostream>
+using namespace std;
+
+// 백준 알고리즘 문제 : 9498(시험성적) , 10817(세 수) - if와 switch 이용
+
+int main(){
+	
+	/*  
+
+	※ 9498(시험성적)
+	
+	(1) C++ - if
+
+	int score; 
+
+	cin >> score;
+
+	// || 아니고 && 이다. 범위에 들어있어야 하므로
+	if (score < 101 && score > 89) {
+		cout << "A" << "\n";	
+	}
+	else if (score < 90 && score > 79) {
+		cout << "B" << "\n";
+	}
+	else if (score < 80 && score > 69) {
+		cout << "C" << "\n";
+	}
+	else if (score < 70 && score > 59) {
+		cout << "D" << "\n";
+	}
+	else {
+		cout << "F" << "\n";
+	}
+
+
+	(2) JAVA - switch
+
+	import java.util.Scanner;
+	class Main{
+		public static void main(String[] args){
+			String grade;
+			Scanner sc = new Scanner(System.in);
+			int score = sc.nextlnt();
+
+			switch(score/10){
+				case 9: case 10:
+					grade = "A"; break;
+				case 8 :
+					grade = "B"; break;
+				case 7 :
+					grade = "C"; break;
+				case 6 :
+					grade = "D"; break;
+				default:
+					grade = "F";
+			}
+			System.out.println(grade);
+		}	
+	}
+	*/
+
+
+	/*
+
+	※ 10817(세 수 문제)
+
+	(1) C++  -  조건연산자 이용
+
+	설명) 조건 연산자(conditional operator) : 조건식의 결과인 true와 false에 따라 문장을 골라서 수행하는 연산자로
+	      피연산자 3개를 갖는 삼항 연산자(ternary operator)다. 조건식의 결과가 참이면 '식1'을, 거짓이면 '식2'를 수행한다.
+
+		  조건식 ? 식1 : 식2 ;
+
+
+	int a, b, c;
+	int two_Max = 0;
+
+	cin >> a >> b >> c;
+
+	// a,b,c 중 두번째로 큰 수를 찾는 것
+	two_Max = (a > b) ? b : a; // a가 b보다 크면 b를 two_Max에 넣어주기
+	two_Max = (two_Max > c) ? two_Max : c; // two_MAx가 a보다 크면 two_Max 넣어주기
+
+	cout << two_Max << "\n";
+
+
+
+	* 블로그 참고(https://blog.naver.com/jhnyang/221504480806)
+
+	(2) c++ -  sort 함수 이용
+
+	#include<algorithm>
+	#include<iostream>
+
+	using namespace std;
+
+	int main(){
+		int arr[3];
+		int size = sizeof(arr)/sizeof(arr[0]);
+
+		for(int i = 0; i < size; i++){
+			cin >> arr[i];
+		}	
+
+		sort(arr, arr+size); // 순서대로 정렬
+
+		cout << arr[1];  // 두번째 값 출력
+
+		return 0;	
+	}
+
+	(3) JAVA -  sort 함수 이용
+
+	import java.util.Scanner;
+	import java.util.Arrays;
+	
+	class Main{
+		public static void main(String[] args){
+			Scnner sc = new Scanner(System.in);
+			int[] arr = new int[3];
+
+			for(int i = 0; i < arr.length; i++){
+				arr[i] = sc.nextlnt();
+			}
+
+			Arrays.sort(arr);
+			System.out.println(arr[1]);
+		}	
+	}
+	*/
+
+}
