@@ -1,0 +1,84 @@
+#include<iostream>
+using namespace std;
+
+
+/*  깊이 우선 탐색법(DFS - Depth First Search)
+
+
+
+*/
+
+int from[22], to[22], people[22]; //시작역, 도착역, 승객(한 블럭에는 최대 22개의 주문량이 있을 수 있으므로)
+int mx, cap[8], sum, orders; // 최대 이익금, 최대 정차역(7개), 이익금 합계, 정차역의 기차표 주문 개수
+
+void DFS(int now);  // now = 시작역
+
+
+int main() {
+
+	int i;
+	int capac, station; // 고객수용제한수, 정차역
+
+	while (cin >> capac >> station >> orders) {
+		if (capac == 0 && station == 0 && orders == 0) { break; }  // 처음 입력되는 3개의 정수가 모두 0이면 입력파일 끝남
+
+		for (i = 0; i < orders; i++) { // 정차역의 기차표 주문 개수만큼 기차표 주문량이 한 줄 씩 입력됨
+			cin >> from[i] >> to[i] >> people[i];
+		}
+
+		for (i = 0; i <= station; i++) { // 정착역은 도착역도 포함
+			cap[i] = capac;  // 정차역(최대 7개 가능)에 고객수용제한수 저장(즉 정차역마다 수용할 수 있는 고객수용제한수)
+		}
+
+		mx = 0;  // 최대 이익금 초기화
+		sum = 0;  // 이익금 합계 초기화
+
+		DFS(0); // DFS 함수 호출
+
+		cout << mx << "\n"; // 최대 이익금 출력(주문량에서 최대로 이득을 낼 수 있는)
+	}
+
+}
+
+
+void DFS(int now) {
+	int i;
+	bool flag; // 예약철회정책 - 주문량 전체 예약 취소(true : 취소하겠다) 또는 주문량 전체 예약함(false : 취소를 하지 않겠다.)
+
+	if (now == orders) { // 마지막 역에 도달하면(마지막 주문량까지 계산다하면)
+		if (sum > mx) { mx = sum; } // 최대 이익금 갱신(한줄 한줄 이익금 계산하고 더할때 이익금이 커지면 변경, 아니면 그대로)
+	}
+	else {  // 마지막 역에 도달하지 않은 것이므로(마지막 주문량까지 계산을 다 하지 않은 것이므로)
+		flag = false;  // 아직은 예약 취소하지 않겠다.(아직 주문량 전체를 계산한 것이 아니므로)
+
+		for (i = from[now]; i < to[now]; i++) {  // 입력받은 한 줄씩 계산하는 것이므로 []안에 now를 넣어줘야 한다.
+			if (cap[i] < people[now]) { flag = true; } // 한 곳이라도 현재 예약한 사람수보다 작은 좌석이면 주문량 전체 취소
+		}
+
+
+		// 좌석 예약이 가능한 경우 
+		// (1) 주문얄 전체를 예약 하는 경우
+		if (!flag) {
+			// 거치는 모든 역에 좌석수를 줄여줌
+			for (i = from[now]; i < to[now]; i++) {
+				cap[i] -= people[now];
+			}
+
+			sum += people[now] * (to[now] - from[now]); // 이익금을 더해준다. / 이익금 = 주문에 포함된 고객의 수 * 기차표 가격(가격은 출발역과 도착역 사이의 정차역 개수(정차역에는 도착역 포함))
+
+			DFS(now + 1); // 다음 주문량을 호출
+
+			// 원래 데이터로 복원을 위해서 좌석수와 이익금을 원래대로 복원한다.(입력이 종료될때까지 입력되는 주문량들을 계산해야하므로)
+			for (i = from[now]; i < to[now]; i++) {
+				cap[i] += people[now];
+			}
+
+			sum -= people[now] * (to[now] - from[now]);
+		}
+
+		//(2) 예약을 하지 않는 경우
+		// 이 경우는 좌석과 이익금의 변화가 없으므로 그냥 DFS를 바로 호출
+		DFS(now + 1);
+	}
+	
+}
