@@ -1,0 +1,51 @@
+/*
+※ deque : 앞과 뒤 모두 추가와 삭제가 가능함
+  - <deque>를 #include하고 사용해야함
+  - 컨테이너 기본 연산 외 deuqe에서 제공되는 연산이 있음
+  - 앞 뒤로 늘어나기 때문에 메모리를 미리 예약할 수 없음 따라서 Vector에서 제공되는 reserve()함수가 제공되지 않음
+  - Vector와 달리 앞에 추가하고 삭제하는 push_front()와 pop_front()함수가 제공됨
+  - 삭제되면 자동으로 메모리가 관리되므로 메모리가 낭비되지 않음
+*/
+
+#include<iostream>
+#include<deque>
+#include<string>
+
+using namespace std;
+
+int main(){
+  int i;
+  
+  //문자열을 원소로 사용하는 deque
+  deque<string> a;
+  
+  //데이터 마지막에 삽입
+  a.push_back("May");
+  a.push_back("I");
+  a.push_back("help");
+  a.push_back("you");
+  a.push_back("?");
+  
+  //배열식으로 출력
+  for(i = 0; i < a.size(); i++){
+    cout << a[i] << " ";
+  }
+  cout<<"\n";
+  
+  //하나를 삭제함
+  a.pup_back(); //뒤쪽에서
+  a.pop_front(); //앞쪽에서
+  
+  //2개를 앞쪽에 삽입
+  a.push_front("...");
+  a.puch_front("!!!");
+  
+  //배열식으로 출력
+  for(i = 0; i < a.size(); i++){
+    cout<< a[i] << " ";
+  }
+  
+  cout<<"\n";
+  
+  return 0;
+}
