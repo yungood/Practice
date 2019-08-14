@@ -1,0 +1,54 @@
+/* 
+
+※ 벡터(Vector) : 원소를 뒤에 넣었다가 빼는 구조 
+  - 앞쪽에는 막혀있어서 원소를 넣을 수 없음
+  - 뒤쪽으로 원소를 집어 넣고 빼는 함수가 제공됨
+  - 컨테이너 기본 연산인 insert를 활용하여 처음이나 중간에 원소를 삽입할 수 있음
+  - 사용하려면 <vector>를 #include를 해야함
+  - 컨테이너의 기본 연산 외에 벡터에서 제공되는 연산이 있음
+  
+  - C++에서는 벡터를 스택 대신 사용할 수 있음/ 배열처럼 사용할 수도 있음
+*/
+
+#include<iostream>
+#include<vector>
+#include<string>
+
+using nasdmepsace std;
+
+int main(){
+  int i;
+  
+  //문자열을 원소로 사용하는 벡터
+  vector<string> a;
+  
+  a.reserve(5);
+  
+  a.push_back("May");
+  a.push_back("I");
+  a.push_back("help");
+  a.push_back("you");
+  a.push_back("?");
+  
+  //배열처럼 사용한다.
+  for(i = 0; i < a.size(); ++i){
+    cout << a[i] << " " ;
+  }
+  cout<< "\n";
+  
+  //하나를 삭제한다.
+  a.pop_back();
+  
+  //2개를 더 삽입한다.
+  a.push_back("...");
+  a.push_back("!!!");
+  
+  for(i = 0; i < a.size(); ++i){
+    cout<< a[i] << " ";
+  }
+  cout<<"\n";
+  
+  cout<< a.front() << " " << a.back() << "\n";
+  
+  return 0;  
+}
