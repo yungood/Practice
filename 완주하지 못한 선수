@@ -65,11 +65,42 @@ string solution(vector<string> participant, vector<string> completion)
 
 
 /*
-
 https://blog.naver.com/rbcjf1214/221519022992 - #include<unordered_map>
 https://blog.naver.com/qkrghdud0/220865126036 - 범위 기반 for문 (ex. for(auto pair : temp){})
 https://blog.naver.com/pkjhj485/221219504078, https://blog.naver.com/ksshlee/221582670563 - pair 클래스
-https://blog.naver.com/jqkt15/221290311639 - auto 
- 
+https://blog.naver.com/jqkt15/221290311639 - auto \ 
 */
 
+
+
+/*
+
+다른 풀이 : 해시 이용하지 X, 각 배열 정렬 후 비교하여 해당하지 않는 값 출력 -> 더 간단하게 해결할 수 있음
+
+   각각의 배열을 이름순으로 정렬한다.
+   참가자와 완주자를 비교해서 서로 다르면 그 참가자는 완주하지 못한 선수다.
+   ** 만약 모두 이름이 같다면 완주자 명단은 참가자 명단보다 한 명 적기 때문에 
+      제일 마지막에 있는 참가자가 완주하지 못한 선수가 된다.
+
+
+#include<string>  // string 사용하기 위해
+#include<vector>  // vector 사용하기 위해
+#include<algorithm> // sort 정렬 사용하기 위해
+using namespace std;
+
+string solution(vector<string> participant, vector<string> completion) 
+{
+   sort(participant.begin(), participant.end()); // participant 배열  sort 정렬
+   sort(completion.begin(), completion.end()); // completion 배열 sort 정렬
+   
+   for(int i = 0; i < completion.size(); i++)
+   {
+     if(participant[i] != completion[i]) // 참가자와 완주자가 다르면
+     {
+      return participant[i]; // 해당 참가자가 완주하지 못한 선수
+     }
+   }
+   
+   return participant[participant.size() - 1];  // ** 다르지 않다면 제일 마지막 참가자가 완주하지 못한 선수
+}
+*/
