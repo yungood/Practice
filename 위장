@@ -1,0 +1,48 @@
+/*
+출제 : 프로그래머스 - 해시 - 위장
+
+스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.
+스파이가 가진 의상들이 담긴 2차원 배열 clothes가 주어질 때 서로 다른 옷의 조합의 수를 return.
+
+제한사항
+*  clothes의 각 행은 [의상의 이름, 의상의 종류]로 이루어져 있습니다.
+*
+*
+*
+*
+* 스파이는 하루에 최소 한 개의 의상은 입습니다.
+
+ex. 
+
+티셔츠 3개, 바지 2개 모든 경우의 수는?  6가지 (3 * 2)
+근데 스파이는 하루에 최소 한 개의 의상은 입는다. 즉 아무것도 안 입는 날은 없다.
+그래서 티셔츠 3개 + 1, 바지 2개 + 1 해주고 곱하여(4 * 3 = 12) -1 해주기
+( '+1'은 한 개의 의상만 입는 경우를 더해주는 것, )
+( '-1'은 한 개의 의상만 입는 경우도 포함한 모든 경우의 수에서 아무것도 입지 않은 경우를 뺴기위해 )
+
+*/
+
+#include <string>
+#include <vector>
+#include <unordered_map> // 해시 map 사용하기 위해
+
+using namespace std;
+
+int solution(vector<vector<string>> clothes) 
+{
+  int answer = 1; // 곱하기 위해 초기값 1로 설정
+  unordered_map<string, int> temp;  // temp 해시 테이블 설정
+  
+  // 해시테이블 설정(clothes 배열이 2차원 배열이라는 점을 주의!!)
+  for(int i = 0; i < clothes.size(); i++)
+  {
+    temp[clothes[i][1]]]++; // key 값 : 의상 이름, value 값 : count 증가
+  }
+  
+  for(auto pair : temp)
+  {
+    answer *= (pair.second + 1)
+  }
+  
+  return answer - 1;
+}
