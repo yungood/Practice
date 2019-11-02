@@ -20,6 +20,13 @@ ex.
 ( '+1'은 한 개의 의상만 입는 경우를 더해주는 것, )
 ( '-1'은 한 개의 의상만 입는 경우도 포함한 모든 경우의 수에서 아무것도 입지 않은 경우를 뺴기위해 )
 
+ex. clothes 배열
+
+의상의 이름      |  의상의 종류                              key 값(의상의 종류)  |  value 값(count 증가)
+yellow hat           headgear                                headgear                  2
+blue_sunglasses      eyewear         =>  해시테이블  =>       eyewear                   1  
+green_turban         headgear
+
 */
 
 #include <string>
