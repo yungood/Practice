@@ -1,0 +1,75 @@
+/*
+
+출제 > 프로그래머스 - 해시 - 완주하지 못한 선수
+
+풀이 > 해시테이블 이용
+
+ex.
+
+Participant 배열(마라톤에 참여한 모든 선수 이름) [ mislav, stanko, mislav, ana] <- 동명이인 존재
+Completion 배열( 마라톤에 완주한 선수 이름) [ stanko, ana, mislav]
+
+-----
+
+(1) Participant 배열 해시테이블로 구성
+
+key 값(이름) | value 값(count)
+  mislav           2          <-  동명이인이므로
+  stanko           1
+  ana              1
+
+(2) Completion 배열과 해시테이블 비교하여 같은 이름 있으면 count 감소
+
+key 값(이름) | value 값(count)
+  mislav           1        
+  stanko           0
+  ana              0
+
+(3)
+value 값이 0보다 큰 값이 있으면 그 값에 해당하는 key 값(이름) 출력 -> Completion 배열에 이름이 없었다는 이야기 -> 즉 완주하지 못한 선수
+
+*/
+
+
+#include<string>  // string 사용하기 위해
+#include<vector>  // vector 사용하기 위해
+#include<unordered_map> // 해시 map 사용하기 위해
+using namespace std;
+
+string solution(vector<string> participant, vector<string> completion) 
+{
+  string answer = "";
+  unordered_map<string, int> temp;  // temp 해시 변수, key 값(string), value 값(int)
+  
+  for(string name : participant)
+  {
+    temp[name]++; // key값 : name,  value 값 : 하나씩증가
+  }
+  
+  for(string name : completion)
+  {
+    temp[name]--; // key값 : name, 같은 이름 있으면 하나씩 감소
+  }
+
+  for(auto pair : temp)
+  {
+    if(pair.second > 0)  // pair.second는 value 값 의미
+    {
+      answer = pair.first; // pair.first는 key 값을 의미
+      break;
+    }
+  }
+  
+  return answer;
+}
+
+
+/*
+
+https://blog.naver.com/rbcjf1214/221519022992 - #include<unordered_map>
+https://blog.naver.com/qkrghdud0/220865126036 - 범위 기반 for문 (ex. for(auto pair : temp){})
+https://blog.naver.com/pkjhj485/221219504078, https://blog.naver.com/ksshlee/221582670563 - pair 클래스
+https://blog.naver.com/jqkt15/221290311639 - auto 
+ 
+*/
+
