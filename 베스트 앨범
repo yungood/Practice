@@ -1,0 +1,116 @@
+/*
+
+출제 : 프로그래머스 - 해시 - 베스트 앨범
+
+스트리밍 사이트에서 장르 별로! 가장 많이 재생된! 노래를 두 개씩! 모아 베스트 앨범을 출시하려 한다.
+노래는 고유번호로 구분! 노래를 수록하는 기준은!
+
+  1) 속한 노래가 '많이 재생된 장르를' 먼저 수록한다.
+  2) 장르 내에서 '많이 재생된 노래를' 먼저 수록한다.
+  3) 장르 내에서 재생 횟수가 같은 노래 중에서는 고유 번호가 낮은 노래를 먼저 수록한다.
+
+노래의 장르를 나타내는 문자열 배열 genres와 노래별 재생 횟수를 나타내는 정수 배열 plays가 주어질 때, 
+베스트 앨범에 들어갈 노래의 고유 번호를 순서대로 return .
+
+제한사항
+* genres[i]는 고유번호가 i인 노래의 장르
+* plays[i]는 고유번호가 i인 노래가 재생된 횟수
+*
+* 장르에 속한 곡이 하나라면, 하나의 곡만 선택
+* 모든 장르는 재생된 횟수가 다름
+
+*/
+
+
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+vector<int> solution(vector<string> genres, vector<int> plays) 
+{
+    vector<int> answer;
+    
+    /* 
+    과정 1) 노래 장르 별로 묶어내는 과정
+    
+    music 해시 테이블(key 값 = 노래 장르, value 값 = 재생한 횟수)
+    musiclist 해시 테이블(key 값 = 노래 장르, value 값 = (index, 재생횟수))
+   
+    */
+    
+    map<string, int> music; // 각 장르별로 횟수 저장
+    map<string, map<int, int>> musiclist; // 각 장르별로 무슨 노래가 몇 번씩 저장되었는지
+    
+    for(int i = 0; i < genres.size(); i++) // 들어온 노래 리스트 만큼 반복
+    {
+        music[genres[i]] += plays[i];  // music map에 장르별로 횟수 추가
+        musiclist[genres[i]][i] = plays[i]; // musiclist map에 고유번호와 재생횟수 추가    
+    }
+    
+    
+    while(music.size() > 0) // 노래 장르가 다 없어질 때 까지 반복
+    {
+    /*
+    과정 2) 어떤 장르가 가장 많이 재생되었는지 확인하는 과정
+    
+    비교를 위해 max 임시 변수 사용, 만약 비교하는 값이 max보다 크다면 genre 변수에 장르의 이름을 넣어줌   
+    */  
+        string genre{};
+        int max{0};
+        
+        for(auto mu : music)
+        {
+            if(max < mu.second)
+            {
+                max = mu.second;
+                genre = mu.first;
+            }
+        }
+        
+        /*
+        과정 3) 장르가 선택 되었을 때 재생이 많이 된 노래를 찾는 과정
+        
+        val = 재생 횟수 저장,  ind = 노래 고유 번호 저장
+        
+        모두 비교가 끝났다면 정답에 고유 번호를 추가하고 리스트에서 제거
+        비교가 한 번도 되지 않았다면 더 이상 노래가 없는 것이므로 반복문 탈출
+        
+        */
+        
+        
+        for(int i = 0; i < 2; i++) // 2곡을 넣어야 하므로 2번 반복
+        {
+            int val = 0, ind = -1;
+            
+            for(auto ml : musiclist[genre]) // 노래 중에서 재생 횟수 가장 높은 값 찾기
+            {
+                if(val < ml.second)
+                {
+                    val = ml.second;
+                    ind = ml.first;
+                }
+            }
+            
+            if(ind == -1) // 노래가 0~1곡 밖에 없다면 반복문 탈출
+            {
+              break;
+            }
+        
+            answer.push_back(ind); // 리턴할 값에 노래 고유번호 추가
+            musiclist[genre].erase(ind);
+        }
+        music.erase(genre); // map에서 사용한 노래 장르 삭제
+    }
+    return answer;
+}
+
+/*
+
+https://blog.naver.com/vjhh0712v/221621777161 - 연관 컨테이너 map 
+https://blog.naver.com/webserver3315/221678909965 - set, unordered_set, map, unordered_map
+https://blog.naver.com/rbcjf1214/221519022992 - set, map
+http://egloos.zum.com/Lusain/v/3157736 - 중괄호 초기화
+
+*/
