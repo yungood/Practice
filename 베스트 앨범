@@ -19,6 +19,32 @@
 * 장르에 속한 곡이 하나라면, 하나의 곡만 선택
 * 모든 장르는 재생된 횟수가 다름
 
+
+ex. 
+               0       1      2       3       4 
+genres 배열 [classic, pop, classic, classic, pop]
+            0     1    2     3   4
+plays 배열 [500, 600, 150, 800, 2500]
+
+(1) music 해시 테이블                                   
+
+key 값  | value 값
+classic    1,450(500+150+800)  => 삭제[6]
+pop        3,100(600+2500)   => 삭제[3]
+
+(2) musiclist 해시 테이블
+
+key 값    |    value 값
+          |   key 값   |  value 값
+classic        0            500    =? 삭제[5]
+pop            1            600    => 삭제[2] 
+classic        2            150
+classic        3            800    => 삭제[4]
+pop            4            2500   => 삭제[1]
+          
+(3) vector<answer>
+answer = <- 4 |<- 1 |<- 3| <- 0
+
 */
 
 
@@ -57,8 +83,8 @@ vector<int> solution(vector<string> genres, vector<int> plays)
     
     비교를 위해 max 임시 변수 사용, 만약 비교하는 값이 max보다 크다면 genre 변수에 장르의 이름을 넣어줌   
     */  
-        string genre{};
-        int max{0};
+        string genre{}; // 가장 많이 재생된 장르
+        int max{0};  // 가장 많이 재생된 장르의 재생 횟수
         
         for(auto mu : music)
         {
@@ -88,20 +114,22 @@ vector<int> solution(vector<string> genres, vector<int> plays)
             {
                 if(val < ml.second)
                 {
-                    val = ml.second;
-                    ind = ml.first;
+                    val = ml.second; // 재생 횟수 높은 값
+                    ind = ml.first;   // 해당하는 재생 횟수의 고유 번호
                 }
             }
             
-            if(ind == -1) // 노래가 0~1곡 밖에 없다면 반복문 탈출
+            if(ind == -1) // 노래가 0 또는 1곡 밖에 없다면 반복문 탈출(ind에 값을 넣어주고 다음 값으로 반복할때 ind가 -1로 다시 초기화되므로)  
             {
               break;
             }
         
-            answer.push_back(ind); // 리턴할 값에 노래 고유번호 추가
-            musiclist[genre].erase(ind);
+            answer.push_back(ind); // 리턴할 값에 노래 고유번호 추가(answer은 vector변수, 즉 answer[4][1][3][0] <- 뒤에서부터 차곡차곡 채워줌)
+            musiclist[genre].erase(ind);  // 가장 많은 노래 횟수의 장르 내에서 재생 횟수가 높은 고유번호를 찾아
+                                          // return 값에 추가하였으므로 musiclist 해시 테이블에서 삭제
         }
-        music.erase(genre); // map에서 사용한 노래 장르 삭제
+        music.erase(genre); // 가장 많은 노래 횟수를 가진 장르 내에서 재생 횟수가 가장 높은 두 곡의 고유번호를 모두 찾았으므로 
+                            // music 해시 테이블에서 삭제
     }
     return answer;
 }
