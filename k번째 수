@@ -1,0 +1,67 @@
+/*
+
+출제 : 프로그래머스 - 정렬 - k번째 수
+
+
+*/
+
+
+// 모든 테스트 케이스 통과 
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> solution(vector<int> array, vector<vector<int>> commands) {
+    vector<int> answer;
+    vector<int> pick;
+    
+    for(int i = 0; i < commands.size(); i++)
+    {
+        for(int j = commands[i][0] -1; j <= commands[i][1] - 1; j++)
+        {
+            pick.push_back(array[j]);
+        }
+        
+        sort(pick.begin(), pick.end());
+        answer.push_back(pick[commands[i][2]-1]);
+        pick.clear();
+    }
+    return answer;
+}
+
+// 통과 하지 못한 테스트 케이스가 있음
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> solution(vector<int> array, vector<vector<int>> commands) {
+    vector<int> answer;
+    vector<int> com;
+    vector<int> pick;
+    
+    for(int i = 0; i < commands[0].size(); i++)
+    {
+        for(int j = 0; j < commands[1].size();j++)
+        {
+            com.push_back(commands[i][j]);
+        }
+        
+        for(int i = com[0]-1; i < com[1]; i++)
+        {
+            pick.push_back(array[i]);
+        }
+        
+        sort(pick.begin(), pick.end());
+        
+        answer.push_back(pick[com[2]-1]);
+        
+        com.clear();
+        pick.clear();     
+    }
+
+    return answer;
+}
