@@ -53,3 +53,46 @@ int main()
 
 
 */
+
+
+
+
+#include <iostream>
+#include <string> // string 함수 사용 위해
+#include <ctype.h>  // isdigit 함수 사용 위해
+#include <vector>   // vector 함수 사용 위해
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    string ss = "101";
+    vector<int> s;
+ 
+    /*
+    
+    insdigit 함수 : 입력한 문자가 숫자로 표현되는 문자이면 0이 아닌 값을 반환함.
+    
+    */
+    
+    
+    for(int i = 0; i < ss.size(); i++)
+    {
+        // 입력된 문자열의 요소를 하나씩 검사해가면서 요소 안의 문자가 숫자이면
+        if(isdigit(ss[i])!=0) 
+        {
+            s.push_back(ss[i] - '0');  // 이 문자를 s 벡터에 하나씩 저장
+        }
+    }
+    
+   
+   do{
+       for(int i = 0; i < s.size(); i++)
+       {
+           cout << s[i] << " ";
+       }
+       cout << "\n";
+   }while(next_permutation(s.begin(), s.end());
+  
+}
