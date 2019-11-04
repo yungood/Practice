@@ -15,6 +15,40 @@ https://blog.naver.com/okok1501/221623875935 - 순열 재귀함수
 https://blog.naver.com/wns7756/221589227613 - 문자열 파싱하기
 https://blog.naver.com/virgointhesk/70169333899 - 문자열 중에 숫자만 읽어서 더하기
 
+#include <iostream>
+#include <string> // string 함수 사용 위해
+#include <ctype.h>  // isdigit 함수 사용 위해
+#include <vector>   // vector 함수 사용 위해
+
+using namespace std;
+
+int main()
+{
+    string ss = "112";
+    vector<int> s;
+    
+    /*
+    
+    insdigit 함수 : 입력한 문자가 숫자로 표현되는 문자이면 0이 아닌 값을 반환함.
+    
+    */
+    
+    
+    for(int i = 0; i < ss.size(); i++)
+    {
+        // 입력된 문자열의 요소를 하나씩 검사해가면서 요소 안의 문자가 숫자이면
+        if(isdigit(ss[i])!=0) 
+        {
+            s.push_back(ss[i]);  // 이 문자를 s 벡터에 하나씩 저장
+        }
+    }
+    
+   for(int i = 0; i < s.size(); i++)
+   {
+       cout << s[i]-'0' << " "; // 일단 s에 저장된 자료형은 문자이므로, 자료형에 맞게 아스키 코드 값을 바꿔줌
+   }
+}
+
 
 
 
