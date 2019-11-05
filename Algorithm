@@ -62,6 +62,7 @@ https://blog.naver.com/krenerd77/221269291004 - 큐 함수 설명
  - https://blog.naver.com/sjhn6371/221674215426 - 벡터
  - https://goluckvv.blog.me/221594201809 - 벡터
  - https://sunnyholic.com/93?category=502076 - 벡터
+ - https://blog.naver.com/qls0147/221375016667 - 벡터(vector<int> a() 와 vector<int> a[]의 차이)
  - vector<int> a(10); -> 기본 벡터 사용법, 크기가 10인 int 배열
    vector<vector<int>> a; -> int 벡터가 들어가 있는 벡터
    vector<int> a[10]; 크기가 10인 vector<int>의 배열
