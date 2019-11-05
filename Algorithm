@@ -58,4 +58,7 @@ https://modoocode.com/241 - find()
 https://jeongw00.tistory.com/303 - 미로 출구 
 https://blog.naver.com/ds020228/221482072001 - 너비 우선 탐색(큐로 구현)
 https://blog.naver.com/krenerd77/221269291004 - 큐 함수 설명
-https://blog.naver.com/rile1036/221668876170 - 벡터
+ - https://blog.naver.com/rile1036/221668876170 - 벡터
+ - vector<int> a(10); -> 기본 벡터 사용법, 크기가 10인 int 배열
+   vector<vector<int>> a; -> int 벡터가 들어가 있는 벡터
+   vector<int> a[10]; 크기가 10인 vector<int>의 배열
