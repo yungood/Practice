@@ -14,6 +14,7 @@ https://blog.naver.com/ohtuna/221552049676 - next permutation
 https://blog.naver.com/okok1501/221623875935 - 순열 재귀함수
 https://blog.naver.com/wns7756/221589227613 - 문자열 파싱하기
 https://blog.naver.com/virgointhesk/70169333899 - 문자열 중에 숫자만 읽어서 더하기
+https://suda552.blog.me/221187373519 - 다음 순열 구하기
 
 #include <iostream>
 #include <string> // string 함수 사용 위해
