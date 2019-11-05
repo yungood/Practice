@@ -62,3 +62,5 @@ https://blog.naver.com/krenerd77/221269291004 - 큐 함수 설명
  - vector<int> a(10); -> 기본 벡터 사용법, 크기가 10인 int 배열
    vector<vector<int>> a; -> int 벡터가 들어가 있는 벡터
    vector<int> a[10]; 크기가 10인 vector<int>의 배열
+https://blog.naver.com/dhsin0468/221681986723 - 큐, 스택으로 구현   
+   
