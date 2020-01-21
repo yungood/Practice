@@ -1,0 +1,76 @@
+
+/* 연습 */
+
+#include <iostream> // find() 함수 사용하기 위해 추가
+#include <vector>   // 벡터 헤더파일 추가
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    vector<int> v; // 벡터 생성자
+    
+    // 벡터 v끝부터 원소 추가
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    v.push_back(4);
+    v.push_back(5);
+    
+    // 벡터 v 원소 출력
+    for(int i=0; i < v.size(); i++)
+    {
+        cout << v[i] << " " << "\n";
+    }
+    
+    
+    
+    cout << "[ 세번째 원소 제거 ]";
+    v.erase(v.begin() + 2); // 시작에서 2칸 이동하여 해당하는 원소 제거
+    
+    for(int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " " << "\n";
+    }
+    
+    
+    
+    cout << "[ 4를 찾아서 제거 ] " << "\n";
+    vector<int>::iterator it = find(v.begin(), v.end(), 4);
+    v.erase(it);
+    
+     for(int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " " << "\n";
+    }
+    
+    
+    
+    cout << " [ 원소 추가 ]"<< "\n";
+    // ++을 뒤에다 붙이게 되면 실행 후 증가가 되기 때문에 실질적으로는 begin()에다 추가됨. 
+    // 그래서 ++을 앞에 붙여 증가먼저 해줘야 함
+    v.insert(++v.begin(), 6); 
+    v.insert(v.end(), 7);
+    
+    for(int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " " << "\n";
+    }
+    
+    
+    
+    cout << " [ Size ] : " << v. size() << "\n";
+    v.clear(); 
+    
+    
+    
+    if(v.empty())
+    {
+        cout << "벡터가 비어있습니다." << "\n";
+    }
+    else
+    {
+        cout << "[ Size ] : " << v.size() << "\n";
+    }
+}
